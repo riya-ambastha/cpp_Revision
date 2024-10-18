@@ -1,0 +1,38 @@
+#include <iostream>
+#include <unordered_map>
+#include <string>
+
+using namespace std;
+
+int lengthOfLongestSubstring(string s) {
+    unordered_map<char, int> charIndexMap;
+    int maxLength = 0;
+    int left = 0;
+ 
+    for (int right = 0; right < s.size(); ++right) {
+        char currentChar = s[right];
+
+    
+        if (charIndexMap.find(currentChar) != charIndexMap.end()) {
+            left = max(charIndexMap[currentChar] + 1, left);
+        }
+
+        charIndexMap[currentChar] = right;
+        maxLength = max(maxLength, right - left + 1);
+    }
+
+    return maxLength;
+}
+
+int main() {
+    string s1 = "abcabcbb";
+    cout << "Output 1: " << lengthOfLongestSubstring(s1) << endl;  
+
+    string s2 = "bbbbb";
+    cout << "Output 2: " << lengthOfLongestSubstring(s2) << endl; 
+
+    string s3 = "pwwkew";
+    cout << "Output 3: " << lengthOfLongestSubstring(s3) << endl;  
+
+    return 0;
+}
