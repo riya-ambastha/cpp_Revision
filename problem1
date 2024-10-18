@@ -1,0 +1,55 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+string convert(string s, int numRows) {
+    
+    if (numRows == 1 || numRows >= s.length()) {
+        return s;
+    }
+    
+   
+    vector<string> rows(min(numRows, int(s.length())));
+    
+   
+    int currentRow = 0;
+    bool goingDown = false;
+     
+    for (char c : s) {
+        // Add the character to the current row.
+        rows[currentRow] += c;
+        
+         
+        if (currentRow == 0 || currentRow == numRows - 1) {
+            goingDown = !goingDown;
+        }
+         
+        currentRow += goingDown ? 1 : -1;
+    }
+    
+    string result;
+    for (string row : rows) {
+        result += row;
+    }
+    
+    return result;
+}
+
+int main() {
+   
+    string s1 = "PAYPALISHIRING";
+    int numRows1 = 3;
+    cout << "Output 1: " << convert(s1, numRows1) << endl;
+    
+    string s2 = "PAYPALISHIRING";
+    int numRows2 = 4;
+    cout << "Output 2: " << convert(s2, numRows2) << endl;
+    
+    string s3 = "A";
+    int numRows3 = 1;
+    cout << "Output 3: " << convert(s3, numRows3) << endl;
+    
+    return 0;
+}
