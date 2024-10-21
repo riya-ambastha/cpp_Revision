@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        int k = 0;   
+        
+        // Iterate over the array
+        for (int i = 0; 
+            if (nums[i] != val) {
+                // Place the non-val element at the index k and increment k
+                nums[k] = nums[i];
+                k++;
+            }
+        }
+        
+        // Return the number of elements not equal to val
+        return k;
+    }
+};
